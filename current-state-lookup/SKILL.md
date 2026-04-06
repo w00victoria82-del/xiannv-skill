@@ -14,9 +14,7 @@ description: >-
 
 默认仓库：`https://github.com/w00victoria82-del/co-designs`
 
-仓库中包含：
-- `axure-parsed-result/prd-full.md` — 从 Axure 原型提取的完整设计文档
-- `PRD-*.md` — 已整理的 PRD 文档
+仓库内容持续更新，脚本会自动扫描仓库中所有 `.md` 文件，无需关心具体文件结构。
 
 ## Workflow
 
