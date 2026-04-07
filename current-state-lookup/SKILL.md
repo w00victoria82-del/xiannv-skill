@@ -12,7 +12,7 @@ description: >-
 
 ## 设计仓库
 
-默认仓库：`https://github.com/w00victoria82-del/co-designs`
+默认仓库：`git@gitlab.seeyon.com:v5-pm/co-designs.git`
 
 仓库内容持续更新，脚本会自动扫描仓库中所有 `.md` 文件，无需关心具体文件结构。
 
@@ -21,7 +21,7 @@ description: >-
 ```
 Current State Lookup Progress:
 - [ ] 获取用户需求描述
-- [ ] 拉取/更新设计仓库内容
+- [ ] 拉取/更新设计仓库内容 (GitLab)
 - [ ] 运行检索脚本，提取相关内容
 - [ ] 读取检索结果
 - [ ] 读取 prompt 模板
@@ -37,16 +37,16 @@ Current State Lookup Progress:
 
 ## Step 2: 拉取设计仓库
 
-运行检索脚本，从 GitHub 拉取最新设计文档并检索相关内容：
+运行检索脚本，从 GitLab 拉取最新设计文档并检索相关内容：
 
 ```bash
-node {skill-dir}/scripts/fetch-designs.js "<需求描述>" <output-dir> [--repo <github-repo-url>]
+node {skill-dir}/scripts/fetch-designs.js "<需求描述>" <output-dir> [--repo <gitlab-repo-ssh-url>]
 ```
 
 **参数：**
 - `<需求描述>` — 用户的需求描述，用于关键词匹配
 - `<output-dir>` — 检索结果输出目录（默认 `./current-state-output`）
-- `--repo` — GitHub 仓库地址（默认 `w00victoria82-del/co-designs`）
+- `--repo` — GitLab 仓库地址（默认 `git@gitlab.seeyon.com:v5-pm/co-designs.git`）
 
 **输出：**
 ```
@@ -100,6 +100,19 @@ node {skill-dir}/scripts/fetch-designs.js "<需求描述>" <output-dir> [--repo 
 
 ## Notes
 
-- 检索基于关键词匹配，支持中文分词
-- 匹配范围：页面标题、功能描述、规则说明
-- 仓库地址可通过 `--repo` 参数覆盖，支持团队扩展到其他仓库
+- **检索深度**：在执行检索脚本时，需结合用户需求的具体场景（如“协同开箱即用”与“CAP 自定义”）进行深度挖掘。
+- **关键词扩展**：除基础功能名外，需尝试搜索特定的交互元素（如“章鱼图标”、“CoMi”、“API 接口名”）及具体的限制参数（如“MB”、“个数”、“array<file>”）。
+- **版本对齐**：关注不同版本文档（如 V5-PM vs CAP-PM）的定义冲突，并在分析中明确指出差异点。
+- **数据源迁移**：已于 2026/4/7 完成数据源从 GitHub 到 GitLab (`git@gitlab.seeyon.com:v5-pm/co-designs.git`) 的平滑迁移。
+
+## Reference Result (Example)
+
+高质量的现状说明应包含详细的表格、明确的来源对照及清晰的差距分析。参考：
+
+### 一、现有功能范围
+- 协同附件问答 (开箱即用) ⚠️部分支持
+- 自定义 AI 控件/按钮 ✅已支持
+
+### 三、已知边界与限制
+- 单个文件大小限制为 ≤ 10MB (现状普遍拦截)。
+- 单个控件支持附件个数上限为 10 个。
