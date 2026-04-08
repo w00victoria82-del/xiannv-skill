@@ -50,6 +50,7 @@ function flattenSitemap(nodes, pages, parentPath) {
   for (const node of nodes) {
     if (!node) continue;
     const name = node.pageName || '';
+    if (name.includes('【废除】')) continue; // 排除废除目录及其下的文档
     const currentPath = parentPath ? `${parentPath} / ${name}` : name;
 
     if ((node.type === 'Wireframe' || node.url) && node.url) {
