@@ -137,5 +137,5 @@ Report completion with:
 
 - The parse script has **no LLM dependency** — it only does HTML→Markdown extraction
 - Modules in `scripts/lib/` are copies of `src/*.js`. After modifying source, run `npm run sync:skill` to update
-- For large prototypes (20+ pages), the `--single-file` flag produces a single concatenated file which may be easier to process
-- "Waste basket" (废稿) folders in the prototype may contain valuable research data — do not skip them
+- 自动忽略名称中包含“【废除】”的目录及其子页面，以确保生成的 PRD 仅包含有效内容。
+- 采用单文件解析（`--single-file`）模式对于大型原型（20+ 页面）通常更高效，产生的合并文件更利于全文逻辑分析。
